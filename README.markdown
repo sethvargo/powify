@@ -38,6 +38,11 @@ Usage
 
 &nbsp;
 
+    $ pow server logs
+    => tail the pow server logs
+
+&nbsp;
+
     $ pow create
     => create a pow app with the same name as the current directory
 
@@ -80,6 +85,16 @@ Usage
 
     $ pow browse foo test
     => open the default browser and navigate to the app named `foo` resolved on test (http://foo.test)
+
+&nbsp;
+
+    $ pow logs
+    => tail the app logs for the app served from this directory
+    
+&nbsp;
+
+    $ pow logs foo
+    => tail the app logs for the app named `foo`
 
 &nbsp;
 

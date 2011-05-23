@@ -3,7 +3,7 @@ require 'fileutils'
 module Powify
   class App
     class << self
-      AVAILABLE_METHODS = %w(create link new destroy unlink remove restart browse open rename help)
+      AVAILABLE_METHODS = %w(create link new destroy unlink remove restart browse open rename logs help)
       
       def run(args)
         method = args[0].strip.to_s.downcase
@@ -12,7 +12,7 @@ module Powify
       end
       
       def create(args = [])
-        return unless is_powable?
+        return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
         FileUtils.ln_s(current_path, symlink_path)
@@ -23,7 +23,7 @@ module Powify
       alias_method :new, :create
       
       def destroy(args = [])
-        return if args[0].nil? && !is_powable?
+        return if args[0].nil? && !is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.base_name(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
         FileUtils.rm(symlink_path)
@@ -34,7 +34,7 @@ module Powify
       alias_method :remove, :destroy
       
       def restart(args = [])
-        return unless is_powable?
+        return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
         if File.exists?(symlink_path)
@@ -73,13 +73,17 @@ module Powify
         $stdout.puts "Type `pow browse #{new_app_name}` to open the application in your browser."
       end
       
+      def logs(args = [])
+        app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
+        %x{tail -f #{POWPATH}/#{app_name}/log/development.log} if is_pow?
+      end
+      
       private
-      def is_powable?
+      def is_pow?
         return true if File.exists?('config.ru') || File.exists?('public/index.html')
        
-        $stdout.puts "This does not appear to be a rack app as there is no config.ru."
-        $stdout.puts "If you are in a Rails 2 application, try https://gist.github.com/909308"
-        $stdout.puts "Pow can also host static apps if there is an index.html in the public dir"
+        $stdout.puts "This does not appear to be a rack application (there is not config.ru)."
+        $stdout.puts "If you are in a Rails 2 application, see the following: https://gist.github.com/909308"
         return false
       end
       
@@ -88,8 +92,14 @@ module Powify
       end
       
       def extension
-        return %x{echo $POW_DOMAIN}.strip unless %x{echo $POW_DOMAIN}.strip.empty?
-        return %x{echo $POW_DOMAINS}.strip.split(',').first unless %x{echo $POW_DOMAINS}.strip.empty?
+        if File.exists?('~/.powconfig')
+          return %x{source ~/.powconfig; echo $POW_DOMAIN}.strip unless %x{source ~/.powconfig; echo $POW_DOMAIN}.strip.empty?
+          return %x{source ~/.powconfig; echo $POW_DOMAINS}.strip.split(',').first unless %x{source ~/.powconfig; echo $POW_DOMAINS}.strip.empty?
+        else
+          return %x{echo $POW_DOMAIN}.strip unless %x{echo $POW_DOMAIN}.strip.empty?
+          return %x{echo $POW_DOMAINS}.strip.split(',').first unless %x{echo $POW_DOMAINS}.strip.empty?
+        end
+        
         return 'dev'
       end
     end

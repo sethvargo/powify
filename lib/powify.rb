@@ -3,5 +3,5 @@ require 'powify/app'
 require 'powify/server'
 
 module Powify
-  POWPATH = "#{File.expand_path('~')}/.pow"
+  POWPATH = "~/.pow"
 end

@@ -3,7 +3,7 @@
 module Powify
   class Server
     class << self
-      AVAILABLE_METHODS = %w(install reinstall update uninstall remove list help)
+      AVAILABLE_METHODS = %w(install reinstall update uninstall remove list logs help)
       
       def run(args = [])
         method = args[0].to_s.downcase
@@ -33,6 +33,11 @@ module Powify
         $stdout.puts "The following POW applications are available:\n\n"
         Dir["#{POWPATH}/*"].each { |a| $stdout.puts "  #{File.basename(a)} -> #{File.readlink(a)}" }
         $stdout.puts "\nRun `pow open [APP_NAME]` to browse an app"
+      end
+      
+      # tail the server logs
+      def logs
+        %x{tail -f ~/Library/Logs/Pow/access.log}
       end
     end
   end

@@ -37,7 +37,7 @@ module Powify
       
       # tail the server logs
       def logs
-        %x{tail -f ~/Library/Logs/Pow/access.log}
+        system "tail -f ~/Library/Logs/Pow/access.log"
       end
     end
   end

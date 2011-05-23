@@ -75,7 +75,7 @@ module Powify
       
       def logs(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
-        %x{tail -f #{POWPATH}/#{app_name}/log/development.log} if is_pow?
+        system "tail -f #{POWPATH}/#{app_name}/log/development.log"
       end
       
       private

@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{powify}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Seth Vargo"]
@@ -15,14 +15,14 @@ Gem::Specification.new do |s|
   s.email = %q{seth.vargo@gmail.com}
   s.executables = ["pow"]
   s.extra_rdoc_files = [
-    "LICENSE",
+    "LICENSE.txt",
     "README.markdown"
   ]
   s.files = [
     ".document",
     "Gemfile",
     "Gemfile.lock",
-    "LICENSE",
+    "LICENSE.txt",
     "README.markdown",
     "Rakefile",
     "VERSION",

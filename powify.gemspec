@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
     "lib/powify/app.rb",
     "lib/powify/client.rb",
     "lib/powify/server.rb",
-    "powify.gemspec",
     "test/helper.rb",
     "test/test_powify.rb"
   ]

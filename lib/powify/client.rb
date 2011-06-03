@@ -3,7 +3,7 @@ module Powify
     class << self
       def run(args = [])
         begin
-          return Powify::Server.run(args[1..-1]) if args[0].strip == 'server'
+          return Powify::Server.run(args[1..-1]) if args[0] && args[0].strip == 'server'
           return Powify::App.run(args)
         rescue Exception => e
           $stdout.puts e

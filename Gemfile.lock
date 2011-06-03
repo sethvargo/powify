@@ -8,6 +8,7 @@ GEM
       rake
     rake (0.9.1)
     rcov (0.9.9)
+    rdoc (3.6.1)
     shoulda (2.11.3)
 
 PLATFORMS
@@ -17,4 +18,5 @@ DEPENDENCIES
   bundler
   jeweler
   rcov
+  rdoc
   shoulda

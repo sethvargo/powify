@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{powify}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Seth Vargo}]
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
     "lib/powify/app.rb",
     "lib/powify/client.rb",
     "lib/powify/server.rb",
+    "powify.gemspec",
     "test/helper.rb",
     "test/test_powify.rb"
   ]

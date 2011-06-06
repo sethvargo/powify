@@ -38,6 +38,31 @@ Usage
 
 &nbsp;
 
+    $ pow server start
+    => start the pow server
+
+&nbsp;
+
+    $ pow server stop
+    => start the pow server
+
+&nbsp;
+
+    $ pow server restart
+    => restart the pow server
+
+&nbsp;
+
+    $ pow server status
+    => print the current status of the server
+
+&nbsp;
+
+    $ pow server config
+    => print the current configuration of the server
+
+&nbsp;
+
     $ pow server logs
     => tail the pow server logs
 

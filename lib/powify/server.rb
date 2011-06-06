@@ -28,6 +28,26 @@ module Powify
       end
       alias_method :remove, :uninstall
       
+      # Start the POW server (command taken from 37 Signals installation script)
+      def start
+        $stdout.puts "Starting the pow server..."
+        %x{launchctl load -Fw "$HOME/Library/LaunchAgents/cx.pow.powd.plist" 2>/dev/null}
+        $stdout.puts "Done!"
+      end
+      
+      # Stop the POW server (command taken from 37 Signals installation script)
+      def stop
+        $stdout.puts "Stopping the pow server..."
+        %x{launchctl unload "$HOME/Library/LaunchAgents/cx.pow.powd.plist" 2>/dev/null || true}
+        $stdout.puts "Done!"
+      end
+      
+      # Restart the POW server
+      def restart
+        stop
+        start
+      end
+      
       # List all active POW applications currently on the server
       def list
         $stdout.puts "The following POW applications are available:\n\n"

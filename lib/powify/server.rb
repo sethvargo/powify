@@ -3,7 +3,7 @@
 module Powify
   class Server
     class << self
-      AVAILABLE_METHODS = %w(install reinstall update uninstall remove list logs help)
+      AVAILABLE_METHODS = %w(install reinstall update uninstall remove start stop restart list logs help)
       
       def run(args = [])
         method = args[0].to_s.downcase

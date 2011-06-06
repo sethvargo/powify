@@ -1,9 +1,11 @@
+require 'json'
+
 # pow server functions
 # invoked via pow server [COMMAND] [ARGS]
 module Powify
   class Server
     class << self
-      AVAILABLE_METHODS = %w(install reinstall update uninstall remove start stop restart list logs help)
+      AVAILABLE_METHODS = %w(install reinstall update uninstall remove start stop restart status config list logs help)
       
       def run(args = [])
         method = args[0].to_s.downcase
@@ -46,6 +48,24 @@ module Powify
       def restart
         stop
         start
+      end
+      
+      # Print the current POW server status
+      def status
+        $stdout.puts "The current status of the pow server is:\n\n"
+        result = %x{curl localhost/status.json --silent --header host:pow}
+        json = JSON.parse(result)
+        json.each_pair { |k,v| $stdout.puts "  #{k}: #{v}" }
+        $stdout.puts "\n"
+      end
+      
+      # Print the current POW server configuration
+      def config
+        $stdout.puts "The current configuration of the pow server is:\n\n"
+        result = %x{curl localhost/config.json --silent --header host:pow}
+        json = JSON.parse(result)
+        json.each_pair {|k,v| $stdout.puts "  #{k}: #{v}"}
+        $stdout.puts "\n"
       end
       
       # List all active POW applications currently on the server

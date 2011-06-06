@@ -22,6 +22,8 @@ module Powify
         $stdout.puts "    pow server update        update pow server"
         $stdout.puts "    pow server uninstall     uninstall pow server"
         $stdout.puts "    pow server list          list all pow apps"
+        $stdout.puts "    pow server status        print the current server status"
+        $stdout.puts "    pow server config        print the current server configuration"
         $stdout.puts "    pow server logs          tails the pow server logs"
         $stdout.puts ""
         $stdout.puts "  [APP COMMANDS]"

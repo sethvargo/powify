@@ -13,127 +13,127 @@ Install powify using the `gem` command:
 
 Usage
 =====
-    $ pow server install
+    $ powify server install
     => install pow server
 
 &nbsp;
 
-    $ pow server reinstall
+    $ powify server reinstall
     => reinstall pow server
 
 &nbsp;
 
-    $ pow server update
+    $ powify server update
     => update pow server
 
 &nbsp;
 
-    $ pow server uninstall
+    $ powify server uninstall
     => uninstall pow server
 
 &nbsp;
 
-    $ pow server list
+    $ powify server list
     => list all apps on this pow server
 
 &nbsp;
 
-    $ pow server start
+    $ powify server start
     => start the pow server
 
 &nbsp;
 
-    $ pow server stop
+    $ powify server stop
     => start the pow server
 
 &nbsp;
 
-    $ pow server restart
+    $ powify server restart
     => restart the pow server
 
 &nbsp;
 
-    $ pow server status
+    $ powify server status
     => print the current status of the server
 
 &nbsp;
 
-    $ pow server config
+    $ powify server config
     => print the current configuration of the server
 
 &nbsp;
 
-    $ pow server logs
+    $ powify server logs
     => tail the pow server logs
 
 &nbsp;
 
-    $ pow create
+    $ powify create
     => create a pow app with the same name as the current directory
 
 &nbsp;
 
-    $ pow create foo
+    $ powify create foo
     => create a pow app named `foo` served from the current directory
 
 &nbsp;
 
-    $ pow destroy
+    $ powify destroy
     => destroy the pow app served from the current directory
 
 &nbsp;
 
-    $ pow destroy foo
+    $ powify destroy foo
     => destroy the pow app named `foo`
 
 &nbsp;
 
-    $ pow restart
+    $ powify restart
     => restart the app served from the current directory
 
 &nbsp;
 
-    $ pow restart foo
+    $ powify restart foo
     => restart the pow app named `foo`
 
 &nbsp;
 
-    $ pow browse
+    $ powify browse
     => open the default browser and navigate to this app
 
 &nbsp;
 
-    $ pow browse foo
+    $ powify browse foo
     => open the default browser and navigate to the app named `foo`
 
 &nbsp;
 
-    $ pow browse foo test
+    $ powify browse foo test
     => open the default browser and navigate to the app named `foo` resolved on test (http://foo.test)
 
 &nbsp;
 
-    $ pow logs
+    $ powify logs
     => tail the app logs for the app served from this directory
     
 &nbsp;
 
-    $ pow logs foo
+    $ powify logs foo
     => tail the app logs for the app named `foo`
 
 &nbsp;
 
-    $ pow rename foo
+    $ powify rename foo
     => rename the pow app in the current directory to `foo`
 
 &nbsp;
 
-    $ pow rename foo bar
+    $ powify rename foo bar
     => rename the pow app named `foo` to `bar`
 
 &nbsp;
 
-    $ pow help
+    $ powify help
     => list pow commands
 
 

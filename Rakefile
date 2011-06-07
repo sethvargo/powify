@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %q{Powify provides an easy wrapper for use with 37 signal's pow. Use this gem to easily install and update pow server. Easily create, destroy, and manage pow apps.'}
   gem.email = "seth.vargo@gmail.com"
   gem.authors = ["Seth Vargo"]
-  gem.executables = ['pow']
+  gem.executables = ['powify']
 end
 Jeweler::RubygemsDotOrgTasks.new
 

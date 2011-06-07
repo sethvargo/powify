@@ -2,12 +2,13 @@ require 'fileutils'
 
 module Powify
   class App
+    
+    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart browse open rename logs help)
+    
     class << self
-      AVAILABLE_METHODS = %w(create link new destroy unlink remove restart browse open rename logs help)
-      
       def run(args)
         method = args[0].strip.to_s.downcase
-        return help unless AVAILABLE_METHODS.include?(method)
+        return Powify::Client.help unless Powify::App.AVAILABLE_METHODS.include?(method)
         self.send(method, args[1..-1])
       end
       

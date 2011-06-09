@@ -44,7 +44,7 @@ Usage
 &nbsp;
 
     $ powify server stop
-    => start the pow server
+    => stop the pow server
 
 &nbsp;
 

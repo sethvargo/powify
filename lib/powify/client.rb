@@ -9,7 +9,7 @@ module Powify
           end
         rescue Exception => e
           $stdout.puts "\nThe command '#{args.last}' does not exist!"
-          #$stdout.puts e
+          $stdout.puts e
         end
         
         help

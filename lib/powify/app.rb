@@ -8,7 +8,7 @@ module Powify
     class << self
       def run(args)
         method = args[0].strip.to_s.downcase
-        return Powify::Client.help unless Powify::App.AVAILABLE_METHODS.include?(method)
+        return Powify::Client.help unless Powify::App::AVAILABLE_METHODS.include?(method)
         self.send(method, args[1..-1])
       end
       

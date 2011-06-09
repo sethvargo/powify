@@ -4,12 +4,13 @@ require 'json'
 # invoked via pow server [COMMAND] [ARGS]
 module Powify
   class Server
+    
+    AVAILABLE_METHODS = %w(install reinstall update uninstall remove start stop restart status config list logs help)
+    
     class << self
-      AVAILABLE_METHODS = %w(install reinstall update uninstall remove start stop restart status config list logs help)
-      
       def run(args = [])
         method = args[0].to_s.downcase
-        return help unless AVAILABLE_METHODS.include?(method)
+        return help unless Powify::Server::AVAILABLE_METHODS.include?(method)
         self.send(method)
       end
       

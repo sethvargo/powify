@@ -139,6 +139,8 @@ Usage
 
 Contribution
 ============
+- 6/9 [@hayesr](https://github.com/hayesr) fixed typo in README
+
 If you would like to contribute, fork and send me a pull request.
 
 Copyright

@@ -18,7 +18,7 @@ module Powify
         symlink_path = "#{POWPATH}/#{app_name}"
         FileUtils.ln_s(current_path, symlink_path)
         $stdout.puts "Successfully created pow app #{app_name}!"
-        $stdout.puts "Type `pow browse #{app_name}` to open the application in your browser."
+        $stdout.puts "Type `powify browse #{app_name}` to open the application in your browser."
       end
       alias_method :link, :create
       alias_method :new, :create
@@ -29,7 +29,7 @@ module Powify
         symlink_path = "#{POWPATH}/#{app_name}"
         FileUtils.rm(symlink_path)
         $stdout.puts "Successfully destroyed pow app #{app_name}!"
-        $stdout.puts "If this was an accident, type `pow create #{app_name}` to re-create the app."
+        $stdout.puts "If this was an accident, type `powify create #{app_name}` to re-create the app."
       end
       alias_method :unlink, :destroy
       alias_method :remove, :destroy
@@ -71,7 +71,7 @@ module Powify
         FileUtils.ln_s(current_path, new_symlink_path)
         
         $stdout.puts "Succesfully renamed #{original_app_name} to #{new_app_name}."
-        $stdout.puts "Type `pow browse #{new_app_name}` to open the application in your browser."
+        $stdout.puts "Type `powify browse #{new_app_name}` to open the application in your browser."
       end
       
       def logs(args = [])

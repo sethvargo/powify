@@ -34,14 +34,14 @@ module Powify
       # Start the POW server (command taken from 37 Signals installation script)
       def start
         $stdout.puts "Starting the pow server..."
-        %x{launchctl load -Fw "$HOME/Library/LaunchAgents/cx.pow.powd.plist" 2>/dev/null}
+        %x{launchctl load "$HOME/Library/LaunchAgents/cx.pow.powd.plist"}
         $stdout.puts "Done!"
       end
       
       # Stop the POW server (command taken from 37 Signals installation script)
       def stop
         $stdout.puts "Stopping the pow server..."
-        %x{launchctl unload "$HOME/Library/LaunchAgents/cx.pow.powd.plist" 2>/dev/null || true}
+        %x{launchctl unload "$HOME/Library/LaunchAgents/cx.pow.powd.plist"}
         $stdout.puts "Done!"
       end
       

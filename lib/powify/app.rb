@@ -87,6 +87,7 @@ module Powify
       def environment(args = [])
         return help if args.empty?
         %x{echo export RAILS_ENV=#{args[0]} > .powenv}
+        $stdout.puts "Successfully changed environment to #{args[0]}."
         restart
       end
       alias_method :env, :environment

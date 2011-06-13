@@ -3,7 +3,7 @@ require 'fileutils'
 module Powify
   class App
     
-    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart browse open rename environment env logs help)
+    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart always_restart browse open rename environment env logs help)
     
     class << self
       def run(args)
@@ -58,7 +58,22 @@ module Powify
         end
       end
       
+      def always_restart(args = [])
+        return unless is_pow?
+        app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
+        symlink_path = "#{POWPATH}/#{app_name}"
+        if File.exists?(symlink_path)
+          FileUtils.mkdir_p("#{symlink_path}/tmp")
+          %x{touch #{symlink_path}/tmp/always_restart.txt}
+          $stdout.puts "#{app_name} will now restart after every request!"
+        else
+          $stdout.puts "Powify could not find an app to always restart with the name #{app_name}"
+          Powify::Server.list
+        end
+      end
+      
       def browse(args = [])
+        return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         ext = args[1] || extension
         symlink_path = "#{POWPATH}/#{app_name}"
@@ -72,6 +87,7 @@ module Powify
       alias_method :open, :browse
       
       def rename(args = [])
+        return unless is_pow?
         return help if args.empty?
         original_app_name, new_app_name = File.basename(current_path), args[0].strip.to_s.downcase       
         original_app_name, new_app_name = args[0].strip.to_s.downcase, args[1].strip.to_s.downcase if args.size > 1
@@ -85,6 +101,7 @@ module Powify
       end
       
       def environment(args = [])
+        return unless is_pow?
         return help if args.empty?
         %x{echo export RAILS_ENV=#{args[0]} > .powenv}
         $stdout.puts "Successfully changed environment to #{args[0]}."

@@ -115,6 +115,16 @@ Usage
 
 &nbsp;
 
+    $ powify always_restart
+    => tell pow to always reload the framework on each request
+
+&nbsp;
+
+    $ powify always_restart foo
+    => tell pow to always reload the framework on each request to the pow app named `foo`
+
+&nbsp;
+
     $ powify restart foo
     => restart the pow app named `foo`
 

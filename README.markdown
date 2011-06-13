@@ -35,6 +35,10 @@ A: What happens when the same app is symlinked multiple times under a different 
 
 Usage
 -----
+
+### Server Commands
+Server Commands can be run from anywhere. These are commands that apply to the Pow Server, not an individual application itself.
+
     $ powify server install
     => install pow server
 
@@ -88,7 +92,9 @@ Usage
     $ powify server logs
     => tail the pow server logs
 
-&nbsp;
+
+### App Commands
+App commands should (but don't necessarily have to be) run from the application directory.
 
     $ powify create
     => create a pow app with the same name as the current directory

@@ -12,7 +12,9 @@ module Powify
         self.send(method, args[1..-1])
       end
       
-      private
+      protected
+      # powify create
+      # powify create foo
       def create(args = [])
         return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
@@ -24,6 +26,8 @@ module Powify
       alias_method :link, :create
       alias_method :new, :create
       
+      # powify destroy
+      # powify destroy foo
       def destroy(args = [])
         return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
@@ -44,6 +48,8 @@ module Powify
       alias_method :unlink, :destroy
       alias_method :remove, :destroy
       
+      # powify restart
+      # powify restart foo
       def restart(args = [])
         return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
@@ -54,10 +60,12 @@ module Powify
           $stdout.puts "Successfully restarted #{app_name}!"
         else
           $stdout.puts "Powify could not find an app to restart with the name #{app_name}"
-          Powify::Server.list
+          $stdout.puts "Type `powify server list` for a full list of applications."
         end
       end
       
+      # powify always_restart
+      # powify always_restart foo
       def always_restart(args = [])
         return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
@@ -68,10 +76,13 @@ module Powify
           $stdout.puts "#{app_name} will now restart after every request!"
         else
           $stdout.puts "Powify could not find an app to always restart with the name #{app_name}"
-          Powify::Server.list
+          $stdout.puts "Type `powify server list` for a full list of applications."
         end
       end
       
+      # powify browse
+      # powify browse foo
+      # powify browse foo test
       def browse(args = [])
         return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
@@ -86,9 +97,10 @@ module Powify
       end
       alias_method :open, :browse
       
+      # powify rename bar
+      # powify rename foo bar
       def rename(args = [])
-        return unless is_pow?
-        return help if args.empty?
+        return if !is_pow? || args.empty?
         original_app_name, new_app_name = File.basename(current_path), args[0].strip.to_s.downcase       
         original_app_name, new_app_name = args[0].strip.to_s.downcase, args[1].strip.to_s.downcase if args.size > 1
         original_symlink_path, new_symlink_path = "#{POWPATH}/#{original_app_name}", "#{POWPATH}/#{new_app_name}"
@@ -100,15 +112,21 @@ module Powify
         $stdout.puts "Type `powify browse #{new_app_name}` to open the application in your browser."
       end
       
+      # powify environment production
+      # powify environment foo production
       def environment(args = [])
-        return unless is_pow?
-        return help if args.empty?
-        %x{echo export RAILS_ENV=#{args[0]} > .powenv}
-        $stdout.puts "Successfully changed environment to #{args[0]}."
-        restart
+        return if !is_pow? || args.empty?
+        app_name, env = File.basename(current_path), args[0].strip.to_s.downcase       
+        app_name, env = args[0].strip.to_s.downcase, args[1].strip.to_s.downcase if args.size > 1
+        symlink_path = "#{POWPATH}/#{app_name}"
+        %x{echo export RAILS_ENV=#{env} > #{symlink_path}/.powenv}
+        $stdout.puts "Successfully changed environment to #{env}."
+        restart [app_name]
       end
       alias_method :env, :environment
       
+      # powify logs
+      # powify logs foo
       def logs(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         system "tail -f #{POWPATH}/#{app_name}/log/development.log"

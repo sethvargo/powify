@@ -33,6 +33,7 @@ module Powify
         $stdout.puts "    powify create [NAME]            creates a pow app from the current directory"
         $stdout.puts "    powify destroy [NAME]           destroys the pow app linked to the current directory"
         $stdout.puts "    powify restart [NAME]           restarts the pow app linked to the current directory"
+        $stdout.puts "    powify always_restart [NAME]    reload the pow app after each request"
         $stdout.puts "    powify rename [NAME]            rename the pow app to [NAME]"
         $stdout.puts "    powify rename [OLD] [NEW]       rename the pow app [OLD] to [NEW]"
         $stdout.puts "    powify environment [ENV]        run the this pow app in a different environment (aliased `env`)"

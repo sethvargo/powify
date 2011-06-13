@@ -35,6 +35,7 @@ module Powify
         $stdout.puts "    powify restart [NAME]           restarts the pow app linked to the current directory"
         $stdout.puts "    powify rename [NAME]            rename the pow app to [NAME]"
         $stdout.puts "    powify rename [OLD] [NEW]       rename the pow app [OLD] to [NEW]"
+        $stdout.puts "    powify environment [ENV]        run the this pow app in a different environment (aliased `env`)"
         $stdout.puts "    powify browse [NAME]            opens and navigates the default browser to this app"
         $stdout.puts "    powify logs [NAME]              tail the application logs"
         $stdout.puts ""                               

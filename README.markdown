@@ -155,6 +155,16 @@ Usage
 
 &nbsp;
 
+    $ powify environment production
+    => run the current pow app in production
+
+&nbsp;
+
+    $ powify env staging
+    => run the current pow app in staging
+
+&nbsp;
+
     $ powify help
     => list pow commands
 

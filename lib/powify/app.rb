@@ -3,7 +3,7 @@ require 'fileutils'
 module Powify
   class App
     
-    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart browse open rename logs help)
+    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart browse open rename environment env logs help)
     
     class << self
       def run(args)
@@ -83,6 +83,13 @@ module Powify
         $stdout.puts "Succesfully renamed #{original_app_name} to #{new_app_name}."
         $stdout.puts "Type `powify browse #{new_app_name}` to open the application in your browser."
       end
+      
+      def environment(args = [])
+        return help if args.empty?
+        %x{echo export RAILS_ENV=#{args[0]} > .powenv}
+        restart
+      end
+      alias_method :env, :environment
       
       def logs(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)

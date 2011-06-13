@@ -5,14 +5,36 @@ Powify is a management tool for [Pow](http://pow.cx/) by 37 signals. It allows y
 
 
 Installation
-============
+------------
 Install powify using the `gem` command:
 
     gem install powify
 
+Important Notes
+---------------
+Powify assumes that your current working directory has the same basename as Pow app. For example, if my site was in:
+
+    /Users/sethvargo/Development/my_site
+
+Powify would expect the name of the Pow app to also be `my_site` (the name of the symlink). This is the default behavior if you just use the command `powify create`. However, it's feasible that you would want a different name that the folder. If this is the case, you'll always need to specify the name of the application like this:
+
+    powify restart foo
+    powify destroy foo
+    powify move foo new_foo
+
+
+### FAQ
+Q: But Seth, why don't you just search the `~/.pow` directory and grab the symlink that points to the current directory?
+
+A: Because it's inefficient and it could cause a problem if the same Pow apps are symlinked multiple times under different names, Powify could accidentally perform an operation on the wrong one.
+
+
+Q: Why don't you just add a hidden file to the project directory when someone creates the app, then you'll know what the symlinked is named.
+
+A: What happens when the same app is symlinked multiple times under a different name? I also hate when applications create files randomly on my hard drive.
 
 Usage
-=====
+-----
     $ powify server install
     => install pow server
 
@@ -138,11 +160,12 @@ Usage
 
 
 Contribution
-============
+------------
 - 6/9 [@hayesr](https://github.com/hayesr) fixed typo in README
 
 If you would like to contribute, fork and send me a pull request.
 
+
 Copyright
-=========
+---------
 Copyright &copy; 2011 Seth Vargo

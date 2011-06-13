@@ -10,10 +10,11 @@ module Powify
     class << self
       def run(args = [])
         method = args[0].to_s.downcase
-        return help unless Powify::Server::AVAILABLE_METHODS.include?(method)
+        raise "The command `#{args.first}` does not exist for pow server!" unless Powify::Server::AVAILABLE_METHODS.include?(method)
         self.send(method)
       end
       
+      private
       # Install the POW server
       def install
         $stdout.puts "Installing/Re-installing/Updating pow server..."

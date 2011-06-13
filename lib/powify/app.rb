@@ -8,10 +8,11 @@ module Powify
     class << self
       def run(args)
         method = args[0].strip.to_s.downcase
-        return Powify::Client.help unless Powify::App::AVAILABLE_METHODS.include?(method)
+        raise "The command `#{args.first}` does not exist!" unless Powify::App::AVAILABLE_METHODS.include?(method)
         self.send(method, args[1..-1])
       end
       
+      private
       def create(args = [])
         return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
@@ -27,17 +28,17 @@ module Powify
         return unless is_pow?
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
-        if File.exists?
+        if File.exists?(symlink_path)
           FileUtils.rm(symlink_path)
           $stdout.puts "Successfully destroyed pow app #{app_name}!"
           $stdout.puts "If this was an accident, type `powify create #{app_name}` to re-create the app."
         else
-          $stdout.puts "Powify could not find an app named `app_name` on this server."
+          $stdout.puts "Powify could not find an app named `#{app_name}` on this server."
           $stdout.puts "By default, powify tries to look for an application with the same name as the current directory."
           $stdout.puts "If your application has a different name than the working directory, you'll need to specify in the command:"
-          $stdout.puts "\n\n\tpowify destroy [NAME]\n\n"
+          $stdout.puts "\n\tpowify destroy [NAME]\n\n"
           $stdout.puts "If your app was named `foo`, you would type:"
-          $stdout.puts "\n\n\tpowify destroy foo\n\n"
+          $stdout.puts "\n\tpowify destroy foo\n\n"
         end
       end
       alias_method :unlink, :destroy

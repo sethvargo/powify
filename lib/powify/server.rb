@@ -74,7 +74,7 @@ module Powify
       def list
         $stdout.puts "The following POW applications are available:\n\n"
         Dir["#{POWPATH}/*"].each { |a| $stdout.puts "  #{File.basename(a)} -> #{File.readlink(a)}" }
-        $stdout.puts "\nRun `pow open [APP_NAME]` to browse an app"
+        $stdout.puts "\nRun `powify open [APP_NAME]` to browse an app"
       end
       
       # tail the server logs

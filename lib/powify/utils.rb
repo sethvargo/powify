@@ -16,7 +16,7 @@ module Powify
       # Install powify.dev
       def install
         uninstall
-        %x{git clone git@github.com:sethvargo/powify.dev.git powify && mv powify #{self.config['hostRoot']}}
+        %x{git clone git@github.com:sethvargo/powify.dev.git powify && cd powify && bundle install --deployment && cd .. && mv powify #{self.config['hostRoot']}}
       end
       alias_method :reinstall, :install
 

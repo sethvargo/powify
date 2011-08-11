@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{powify}
-  s.version = "0.5.6"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Seth Vargo}]
-  s.date = %q{2011-07-08}
+  s.date = %q{2011-08-11}
   s.description = %q{Powify provides an easy wrapper for use with 37 signal's pow. Use this gem to easily install and update pow server. Easily create, destroy, and manage pow apps.'}
   s.email = %q{seth.vargo@gmail.com}
   s.executables = [%q{powify}]
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
     "lib/powify/app.rb",
     "lib/powify/client.rb",
     "lib/powify/server.rb",
+    "lib/powify/utils.rb",
     "powify.gemspec",
     "test/helper.rb",
     "test/test_powify.rb"

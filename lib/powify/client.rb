@@ -5,6 +5,7 @@ module Powify
         begin
           if args[0] && args[0].strip != 'help'
             return Powify::Server.run(args[1..-1]) if args[0].strip == 'server'
+            return Powify::Server.run(args[1..-1]) if args[0].strip == 'utils'
             return Powify::App.run(args)
           end
         rescue Exception => e
@@ -28,6 +29,11 @@ module Powify
         $stdout.puts "    powify server status            print the current server status"
         $stdout.puts "    powify server config            print the current server configuration"
         $stdout.puts "    powify server logs              tails the pow server logs"
+        $stdout.puts ""
+        $stdout.puts "  [UTILS COMMANDS]"
+        $stdout.puts "    powify utils install            install powify.dev server management tool"
+        $stdout.puts "    powify utils reinstall          reinstall powify.dev server management tool"
+        $stdout.puts "    powify utils uninstall          uninstall powify.dev server management tool"
         $stdout.puts ""
         $stdout.puts "  [APP COMMANDS]"
         $stdout.puts "    powify create [NAME]            creates a pow app from the current directory"

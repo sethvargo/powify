@@ -92,6 +92,22 @@ Server Commands can be run from anywhere. These are commands that apply to the P
     $ powify server logs
     => tail the pow server logs
 
+### Utils Commands
+Util commands were introduced after I created [powify.dev](https://github.com/sethvargo/powify.dev). They make install `powify.dev` really easy!
+
+    $ powify utils install
+    => install powify.dev
+
+&nbsp;
+
+    $ powify utils reinstall
+    => reinstall powify.dev
+
+&nbsp;
+
+    $ powify utils uninstall
+    => uninstall powify.dev
+
 
 ### App Commands
 App commands should (but don't necessarily have to be) run from the application directory.

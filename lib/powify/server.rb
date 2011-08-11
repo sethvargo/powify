@@ -1,7 +1,7 @@
 require 'json'
 
-# pow server functions
-# invoked via pow server [COMMAND] [ARGS]
+# powify server functions
+# invoked via powify server [COMMAND] [ARGS]
 module Powify
   class Server
 
@@ -10,7 +10,7 @@ module Powify
     class << self
       def run(args = [])
         method = args[0].to_s.downcase
-        raise "The command `#{args.first}` does not exist for pow server!" unless Powify::Server::AVAILABLE_METHODS.include?(method)
+        raise "The command `#{args.first}` does not exist for `powify server`!" unless Powify::Server::AVAILABLE_METHODS.include?(method)
         self.send(method)
       end
 

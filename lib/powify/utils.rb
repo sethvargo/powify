@@ -1,3 +1,4 @@
+require 'json'
 # powify server functions
 # invoked via powify utils [COMMAND] [ARGS]
 module Powify
@@ -16,15 +17,20 @@ module Powify
       # Install powify.dev
       def install
         uninstall
-        %x{git clone git@github.com:sethvargo/powify.dev.git powify && cd powify && bundle install --deployment && cd .. && mv powify #{Powify::Server.config['hostRoot']}}
+        %x{git clone git@github.com:sethvargo/powify.dev.git powify && cd powify && bundle install --deployment && cd .. && mv powify #{config['hostRoot']}}
       end
       alias_method :reinstall, :install
 
       # Uninstall powify.dev
       def uninstall
-        %x{rm -rf #{Powify::Server.config['hostRoot']}/powify}
+        %x{rm -rf #{config['hostRoot']}/powify}
       end
       alias_method :remove, :uninstall
+
+      def config
+        result = %x{curl localhost/config.json --silent --header host:pow}
+        JSON.parse(result)
+      end
     end
   end
 end

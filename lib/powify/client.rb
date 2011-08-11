@@ -5,7 +5,7 @@ module Powify
         begin
           if args[0] && args[0].strip != 'help'
             return Powify::Server.run(args[1..-1]) if args[0].strip == 'server'
-            return Powify::Server.run(args[1..-1]) if args[0].strip == 'utils'
+            return Powify::Utils.run(args[1..-1]) if args[0].strip == 'utils'
             return Powify::App.run(args)
           end
         rescue Exception => e

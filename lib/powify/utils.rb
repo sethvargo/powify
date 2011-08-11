@@ -17,13 +17,16 @@ module Powify
       # Install powify.dev
       def install
         uninstall
-        %x{git clone git@github.com:sethvargo/powify.dev.git powify && cd powify && bundle install --deployment && cd .. && mv powify #{config['hostRoot']}}
+        $stdouts.puts "Cloning powify.dev from github..."
+        %x{git clone -q git@github.com:sethvargo/powify.dev.git powify && cd powify && bundle install --deployment && cd .. && mv powify "#{config['hostRoot']}"}
+        $stdouts.puts "Done!"
       end
       alias_method :reinstall, :install
 
       # Uninstall powify.dev
       def uninstall
         %x{rm -rf #{config['hostRoot']}/powify}
+        $stdout.puts "Successfully removed powify.dev"
       end
       alias_method :remove, :uninstall
 

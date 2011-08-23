@@ -93,7 +93,7 @@ Server Commands can be run from anywhere. These are commands that apply to the P
     => tail the pow server logs
 
 ### Utils Commands
-Util commands were introduced after I created [powify.dev](https://github.com/sethvargo/powify.dev). They make install `powify.dev` really easy!
+Util commands were introduced after I created [powify.dev](https://github.com/sethvargo/powify.dev). They make installing `powify.dev` really easy!
 
     $ powify utils install
     => install powify.dev

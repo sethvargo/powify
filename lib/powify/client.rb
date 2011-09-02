@@ -26,6 +26,8 @@ module Powify
         $stdout.puts "    powify server start             start the pow server"
         $stdout.puts "    powify server stop              stop the pow server"
         $stdout.puts "    powify server restart           restart the pow server"
+        $stdout.puts "    powify server host              adds all pow apps to /etc/hosts file"
+        $stdout.puts "    powify server unhost            removes all pow apps from /etc/hosts file"
         $stdout.puts "    powify server status            print the current server status"
         $stdout.puts "    powify server config            print the current server configuration"
         $stdout.puts "    powify server logs              tails the pow server logs"

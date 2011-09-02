@@ -79,6 +79,16 @@ Server Commands can be run from anywhere. These are commands that apply to the P
 
 &nbsp;
 
+    $ powify server host
+    => copies all pow apps to /etc/hosts - this is used for offline development when you aren't connected to a network
+
+&nbsp;
+
+    $ powify server unhost
+    => removes all pow apps to /etc/hosts
+
+`host` and `unhost` were written by [Christopher Lindblom](https://github.com/lindblom)
+
     $ powify server status
     => print the current status of the server
 
@@ -205,6 +215,7 @@ Contribution
 ------------
 - 6/9 [@hayesr](https://github.com/hayesr) fixed typo in README
 - 8/24 [@lukeholder](https://github.com/lukeholder) fixed typo in README
+- 9/2 [@lindblom](https://github.com/lindblom) - author of host and unhost
 
 If you would like to contribute, fork and send me a pull request.
 

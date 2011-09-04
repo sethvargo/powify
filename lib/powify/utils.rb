@@ -3,7 +3,7 @@ require 'json'
 # invoked via powify utils [COMMAND] [ARGS]
 module Powify
   class Utils
-
+    extend Powify
     AVAILABLE_METHODS = %w(install reinstall uninstall remove help)
 
     class << self
@@ -29,11 +29,6 @@ module Powify
         $stdout.puts "Successfully removed powify.dev"
       end
       alias_method :remove, :uninstall
-
-      def config
-        result = %x{curl localhost/config.json --silent --header host:pow}
-        JSON.parse(result)
-      end
     end
   end
 end

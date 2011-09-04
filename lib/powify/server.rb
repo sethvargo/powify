@@ -4,7 +4,7 @@ require 'json'
 # invoked via powify server [COMMAND] [ARGS]
 module Powify
   class Server
-
+    extend Powify
     AVAILABLE_METHODS = %w(install reinstall update uninstall remove start stop restart host unhost status config list logs help)
 
     class << self
@@ -60,18 +60,24 @@ module Powify
       # This method was taken from Christopher Lindlom pull request to powder, a similar gem for managing
       # pow applications. I DID NOT write this code (although I tested it), so don't give me any credit!
       def host
-        hosts_file_path = "/etc/hosts"
-        pow_domain_records = Dir[POW_PATH + "/*"].map { |a| "127.0.0.1\t#{File.basename(a)}.#{domain}\t#powder" }
-        hosts_file = File.read("/etc/hosts").split("\n").delete_if {|row| row =~ /.+(#powder)/}
-        first_loopback_index = hosts_file.index {|i| i =~ /^(127.0.0.1).+/}
-        hosts_file = hosts_file.insert(first_loopback_index + 1, pow_domain_records)
-        File.open("#{ENV['HOME']}/hosts-powder", "w")  do
-          |file| file.puts hosts_file.join("\n")
-        end
-        %x{cp #{hosts_file_path} #{ENV['HOME']}/hosts-powder.bak}
-        %x{sudo mv #{ENV['HOME']}/hosts-powder #{hosts_file_path}}
+        hosts_file_path = '/etc/hosts'
+        hosts_file = File.read(hosts_file_path)
+        return $stdout.puts 'Pow is already in the hosts file. Please run `powify server unhost`' if hosts_file =~ /(#powify)/ || File.exists?("#{hosts_file_path}.powify.bak")
+
+        # break our hosts file into lines
+        hosts_file = hosts_file.split("\n")
+        pow_domains = Dir["#{POWPATH}/*"].collect { |a| "127.0.0.1\t#{File.basename(a)}.#{extension}\t#powify" }
+
+        # find the loop back and insert our domains after
+        first_loopback_index = hosts_file.index{ |i| i =~ /^(127.0.0.1).+/ }
+        hosts_file = hosts_file.insert(first_loopback_index + 1, pow_domains)
+
+        %x{sudo cp #{hosts_file_path} #{hosts_file_path}.powify.bak}
+        File.open(hosts_file_path, 'w+') { |f| f.puts hosts_file.join("\n") }
+
         %x{dscacheutil -flushcache}
-        $stdout.puts "Domains added to hosts file, old host file is saved at #{ENV['HOME']}/hosts-powder.bak"
+        $stdout.puts "All Pow apps were added to the hosts file."
+        $stdout.puts "The old host file is saved at #{hosts_file_path}.powify.bak."
       end
 
       # Adds POW domains to the hosts file
@@ -82,15 +88,17 @@ module Powify
       # This method was taken from Christopher Lindlom pull request to powder, a similar gem for managing
       # pow applications. I DID NOT write this code (although I tested it), so don't give me any credit!
       def unhost
-        hosts_file_path = "/etc/hosts"
-        hosts_file = File.read("/etc/hosts").split("\n").delete_if {|row| row =~ /.+(#powder)/}
-        File.open("#{ENV['HOME']}/hosts-powder", "w")  do
-          |file| file.puts hosts_file.join("\n")
-        end
-        %x{cp #{hosts_file_path} #{ENV['HOME']}/hosts-powder.bak}
-        %x{sudo mv #{ENV['HOME']}/hosts-powder #{hosts_file_path}}
+        hosts_file_path = '/etc/hosts'
+        hosts_file = File.read(hosts_file_path)
+        return $stdout.puts 'Pow is not in the host file, and there is no backup file. Please run `powify server host`' unless hosts_file =~ /.+(#powify)/ || File.exists?("#{hosts_file_path}.powify.bak")
+
+        hosts_file = hosts_file.split("\n").delete_if { |row| row =~ /.+(#powify)/ } # remove any existing records
+
+        File.open(hosts_file_path, 'w+') { |f| f.puts hosts_file.join("\n") }
+        %x{sudo rm #{hosts_file_path}.powify.bak}
+
         %x{dscacheutil -flushcache}
-        $stdout.puts "Domains removed from hosts file, old host file is saved at #{ENV['HOME']}/hosts-powder.bak"
+        $stdout.puts "All Pow apps were removed from the hosts file."
       end
 
       # Print the current POW server status

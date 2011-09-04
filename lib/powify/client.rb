@@ -1,5 +1,6 @@
 module Powify
   class Client
+    extend Powify
     class << self
       def run(args = [])
         begin

@@ -52,7 +52,7 @@ module Powify
         start
       end
 
-      # Adds POW domains to the hosts file
+      # Add POW domains to the hosts file
       #
       # Original Author: Christopher Lindblom (https://github.com/lindblom)
       # Original Context: https://github.com/lindblom/powder/commit/8b2f2609e91ddbc72f53c7fbb6daee92a82e21c0
@@ -80,7 +80,7 @@ module Powify
         $stdout.puts "The old host file is saved at #{hosts_file_path}.powify.bak."
       end
 
-      # Adds POW domains to the hosts file
+      # Remove POW domains from the hosts file
       #
       # Original Author: Christopher Lindblom (https://github.com/lindblom)
       # Original Context: https://github.com/lindblom/powder/commit/8b2f2609e91ddbc72f53c7fbb6daee92a82e21c0
@@ -126,7 +126,7 @@ module Powify
         $stdout.puts "\nRun `powify open [APP_NAME]` to browse an app"
       end
 
-      # tail the server logs
+      # Tail the server logs
       def logs
         system "tail -f ~/Library/Logs/Pow/access.log"
       end

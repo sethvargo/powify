@@ -16,7 +16,6 @@ module Powify
       def create(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
-        return unless is_pow?(symlink_path)
         FileUtils.ln_s(current_path, symlink_path)
         $stdout.puts "Successfully created pow app #{app_name}!"
         $stdout.puts "Type `powify browse #{app_name}` to open the application in your browser."
@@ -29,7 +28,6 @@ module Powify
       def destroy(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
-        return unless is_pow?(symlink_path)
         if File.exists?(symlink_path)
           FileUtils.rm(symlink_path)
           $stdout.puts "Successfully destroyed pow app #{app_name}!"
@@ -51,7 +49,6 @@ module Powify
       def restart(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
-        return unless is_pow?(symlink_path)
         if File.exists?(symlink_path)
           FileUtils.mkdir_p("#{symlink_path}/tmp")
           %x{touch #{symlink_path}/tmp/restart.txt}
@@ -67,7 +64,6 @@ module Powify
       def always_restart(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
-        return unless is_pow?(symlink_path)
         if File.exists?(symlink_path)
           FileUtils.mkdir_p("#{symlink_path}/tmp")
           %x{touch #{symlink_path}/tmp/always_restart.txt}
@@ -85,7 +81,6 @@ module Powify
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         ext = args[1] || extension
         symlink_path = "#{POWPATH}/#{app_name}"
-        return unless is_pow?(symlink_path)
         if File.exists?(symlink_path)
           %x{open http://#{app_name}.#{ext}}
         else
@@ -103,8 +98,6 @@ module Powify
         original_app_name, new_app_name = args[0].strip.to_s.downcase, args[1].strip.to_s.downcase if args.size > 1
         original_symlink_path, new_symlink_path = "#{POWPATH}/#{original_app_name}", "#{POWPATH}/#{new_app_name}"
 
-        return unless is_pow?(original_symlink_path)
-
         FileUtils.rm(original_symlink_path)
         FileUtils.ln_s(current_path, new_symlink_path)
 
@@ -119,7 +112,6 @@ module Powify
         app_name, env = File.basename(current_path), args[0].strip.to_s.downcase
         app_name, env = args[0].strip.to_s.downcase, args[1].strip.to_s.downcase if args.size > 1
         symlink_path = "#{POWPATH}/#{app_name}"
-        return unless is_pow?(symlink_path)
         %x{echo export RAILS_ENV=#{env} > #{symlink_path}/.powenv}
         $stdout.puts "Successfully changed environment to #{env}."
         restart [app_name]
@@ -131,7 +123,6 @@ module Powify
       def logs(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
-        return unless is_pow?(symlink_path)
         system "tail -f #{symlink_path}/log/#{ENV['RAILS_ENV']}.log"
       end
     end

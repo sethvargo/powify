@@ -7,14 +7,6 @@ require 'fileutils'
 module Powify
   POWPATH = File.expand_path("~/.pow")
 
-  def is_pow?(path)
-    return true if File.exists?("#{path}/config.ru") || File.exists?("#{path}/public")
-
-    $stdout.puts 'This does not appear to be a rack application (there is not config.ru).'
-    $stdout.puts 'If you are in a Rails 2 application, see the following: https://gist.github.com/909308'
-    return false
-  end
-
   def current_path
     %x{pwd}.strip
   end

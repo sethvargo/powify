@@ -157,6 +157,16 @@ App commands should (but don't necessarily have to be) run from the application 
 
 &nbsp;
 
+    $ powify always_restart_off
+    => tell pow to not reload the framework on each request
+
+&nbsp;
+
+    $ powify always_restart_off foo
+    => tell pow to not reload the framework on each request to the pow app named `foo`
+
+&nbsp;
+
     $ powify restart foo
     => restart the pow app named `foo`
 

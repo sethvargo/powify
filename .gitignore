@@ -46,3 +46,6 @@ pkg
 
 # For rubinius:
 #*.rbc
+
+# Ignore gems built in this dir
+*.gem

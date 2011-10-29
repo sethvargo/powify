@@ -1,7 +1,7 @@
 module Powify
   class App
     extend Powify
-    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart always_restart browse open rename environment env logs help)
+    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart always_restart always_restart_off browse open rename environment env logs help)
 
     class << self
       def run(args)
@@ -71,6 +71,19 @@ module Powify
         else
           $stdout.puts "Powify could not find an app to always restart with the name #{app_name}"
           $stdout.puts "Type `powify server list` for a full list of applications."
+        end
+      end
+      
+      # powify always_restart_off
+      # powify always_restart_off foo
+      def always_restart_off(args = [])
+        app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
+        restart_txt_path = "#{POWPATH}/#{app_name}/tmp/always_restart.txt"
+        if File.exists?(restart_txt_path)
+          FileUtils.rm_f(restart_txt_path)
+          $stdout.puts "#{app_name} will no longer restart after every request!"
+        else
+          $stdout.puts "Powify detemined that the app with name #{app_name} is not set to always restart."
         end
       end
 

@@ -223,9 +223,8 @@ App commands should (but don't necessarily have to be) run from the application 
 
 Contribution
 ------------
-- 6/9 [@hayesr](https://github.com/hayesr) fixed typo in README
-- 8/24 [@lukeholder](https://github.com/lukeholder) fixed typo in README
-- 9/2 [@lindblom](https://github.com/lindblom) - author of host and unhost
+- 9/2 [@lindblom](https://github.com/lindblom) - author of `host` and `unhost`
+- 10/29 [@warwickp](https://github.com/warwickp) - wrote `always_restart_off`
 
 If you would like to contribute, fork and send me a pull request.
 

@@ -136,7 +136,7 @@ module Powify
       def logs(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
-        system "tail -f #{symlink_path}/log/#{ENV['RAILS_ENV']}.log"
+        system "tail -f #{symlink_path}/log/#{ENV['RAILS_ENV']||'development'}.log"
       end
     end
   end

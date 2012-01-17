@@ -5,15 +5,16 @@
 
 Gem::Specification.new do |s|
   s.name = "powify"
-  s.version = "0.8.2"
+  s.version = "0.8.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Seth Vargo"]
-  s.date = "2011-10-29"
+  s.date = "2012-01-17"
   s.description = "Powify provides an easy wrapper for use with 37 signal's pow. Use this gem to easily install and update pow server. Easily create, destroy, and manage pow apps.'"
   s.email = "seth.vargo@gmail.com"
   s.executables = ["powify"]
   s.extra_rdoc_files = [
+    "LICENSE",
     "LICENSE.txt",
     "README.markdown"
   ]
@@ -21,6 +22,7 @@ Gem::Specification.new do |s|
     ".document",
     "Gemfile",
     "Gemfile.lock",
+    "LICENSE",
     "LICENSE.txt",
     "README.markdown",
     "Rakefile",
@@ -38,7 +40,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/sethvargo/powify"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.15"
   s.summary = "Powify is an easy-to-use wrapper for 37 signal's pow"
 
   if s.respond_to? :specification_version then

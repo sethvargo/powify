@@ -10,7 +10,6 @@ module Powify
         self.send(method, args[1..-1])
       end
 
-      protected
       # powify create
       # powify create foo
       def create(args = [])

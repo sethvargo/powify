@@ -14,7 +14,6 @@ module Powify
         self.send(method)
       end
 
-      protected
       # Install the POW server
       def install
         $stdout.puts "Installing/Re-installing/Updating pow server..."

@@ -13,7 +13,6 @@ module Powify
         self.send(method)
       end
 
-      protected
       # Install powify.dev
       def install
         uninstall

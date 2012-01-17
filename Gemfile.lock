@@ -1,26 +1,16 @@
+PATH
+  remote: .
+  specs:
+    powify (0.8.5)
+      json
+
 GEM
   remote: http://rubygems.org/
   specs:
-    git (1.2.5)
-    jeweler (1.6.4)
-      bundler (~> 1.0)
-      git (>= 1.2.5)
-      rake
     json (1.6.5)
-    rake (0.9.2.2)
-    rcov (0.9.11)
-    rdoc (3.12)
-      json (~> 1.4)
-    shoulda (2.11.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
-  jeweler
-  json
-  rake
-  rcov
-  rdoc
-  shoulda
+  powify!

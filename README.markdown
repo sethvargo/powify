@@ -35,191 +35,39 @@ A: What happens when the same app is symlinked multiple times under a different 
 
 Usage
 -----
-
-### Server Commands
-Server Commands can be run from anywhere. These are commands that apply to the Pow Server, not an individual application itself.
-
-    $ powify server install
-    => install pow server
-
-&nbsp;
-
-    $ powify server reinstall
-    => reinstall pow server
-
-&nbsp;
-
-    $ powify server update
-    => update pow server
-
-&nbsp;
-
-    $ powify server uninstall
-    => uninstall pow server
-
-&nbsp;
-
-    $ powify server list
-    => list all apps on this pow server
-
-&nbsp;
-
-    $ powify server start
-    => start the pow server
-
-&nbsp;
-
-    $ powify server stop
-    => stop the pow server
-
-&nbsp;
-
-    $ powify server restart
-    => restart the pow server
-
-&nbsp;
-
-    $ powify server host
-    => copies all pow apps to /etc/hosts - this is used for offline development when you aren't connected to a network
-
-`host` was written by [Christopher Lindblom](https://github.com/lindblom)
-
-    $ powify server unhost
-    => removes all pow apps to /etc/hosts
-
-`unhost` was written by [Christopher Lindblom](https://github.com/lindblom)
-
-    $ powify server status
-    => print the current status of the server
-
-&nbsp;
-
-    $ powify server config
-    => print the current configuration of the server
-
-&nbsp;
-
-    $ powify server logs
-    => tail the pow server logs
-
-### Utils Commands
-Util commands were introduced after I created [powify.dev](https://github.com/sethvargo/powify.dev). They make installing `powify.dev` really easy!
-
-    $ powify utils install
-    => install powify.dev
-
-&nbsp;
-
-    $ powify utils reinstall
-    => reinstall powify.dev
-
-&nbsp;
-
-    $ powify utils uninstall
-    => uninstall powify.dev
-
-
-### App Commands
-App commands should (but don't necessarily have to be) run from the application directory.
-
-    $ powify create
-    => create a pow app with the same name as the current directory
-
-&nbsp;
-
-    $ powify create foo
-    => create a pow app named `foo` served from the current directory
-
-&nbsp;
-
-    $ powify destroy
-    => destroy the pow app served from the current directory
-
-&nbsp;
-
-    $ powify destroy foo
-    => destroy the pow app named `foo`
-
-&nbsp;
-
-    $ powify restart
-    => restart the app served from the current directory
-
-&nbsp;
-
-    $ powify always_restart
-    => tell pow to always reload the framework on each request
-
-&nbsp;
-
-    $ powify always_restart foo
-    => tell pow to always reload the framework on each request to the pow app named `foo`
-
-&nbsp;
-
-    $ powify always_restart_off
-    => tell pow to not reload the framework on each request
-
-&nbsp;
-
-    $ powify always_restart_off foo
-    => tell pow to not reload the framework on each request to the pow app named `foo`
-
-&nbsp;
-
-    $ powify restart foo
-    => restart the pow app named `foo`
-
-&nbsp;
-
-    $ powify browse
-    => open the default browser and navigate to this app
-
-&nbsp;
-
-    $ powify browse foo
-    => open the default browser and navigate to the app named `foo`
-
-&nbsp;
-
-    $ powify browse foo test
-    => open the default browser and navigate to the app named `foo` resolved on test (http://foo.test)
-
-&nbsp;
-
-    $ powify logs
-    => tail the app logs for the app served from this directory
-    
-&nbsp;
-
-    $ powify logs foo
-    => tail the app logs for the app named `foo`
-
-&nbsp;
-
-    $ powify rename foo
-    => rename the pow app in the current directory to `foo`
-
-&nbsp;
-
-    $ powify rename foo bar
-    => rename the pow app named `foo` to `bar`
-
-&nbsp;
-
-    $ powify environment production
-    => run the current pow app in production
-
-&nbsp;
-
-    $ powify env staging
-    => run the current pow app in staging
-
-&nbsp;
-
-    $ powify help
-    => list pow commands
-
+```bash
+SERVER COMMANDS
+  powify server install            install pow server
+  powify server reinstall          reinstall pow server
+  powify server update             update pow server
+  powify server uninstall          uninstall pow server
+  powify server list               list all pow apps
+  powify server start              start the pow server
+  powify server stop               stop the pow server
+  powify server restart            restart the pow server
+  powify server host               adds all pow apps to /etc/hosts file
+  powify server unhost             removes all pow apps from /etc/hosts file
+  powify server status             print the current server status
+  powify server config             print the current server configuration
+  powify server logs               tails the pow server logs
+
+UTILS COMMANDS
+  powify utils install             install powify.dev server management tool
+  powify utils reinstall           reinstall powify.dev server management tool
+  powify utils uninstall           uninstall powify.dev server management tool
+
+APP COMMANDS
+  powify create [NAME]             creates a pow app from the current directory
+  powify destroy [NAME]            destroys the pow app linked to the current directory
+  powify restart [NAME]            restarts the pow app linked to the current directory
+  powify always_restart [NAME]     reload the pow app after each request
+  powify always_restart_off [NAME] do not reload the pow app after each request
+  powify rename [NAME]             rename the pow app to [NAME]
+  powify rename [OLD] [NEW]        rename the pow app [OLD] to [NEW]
+  powify environment [ENV]         run the this pow app in a different environment (aliased `env`)
+  powify browse [NAME]             opens and navigates the default browser to this app
+  powify logs [NAME]               tail the application logs
+```
 
 Contribution
 ------------
@@ -227,14 +75,3 @@ Contribution
 - 10/29 [@warwickp](https://github.com/warwickp) - wrote `always_restart_off`
 
 If you would like to contribute, fork and send me a pull request.
-
-
-License
--------
-Copyright (c) 2012 Seth Vargo
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

@@ -4,7 +4,7 @@ module Powify
     class << self
       def run(args = [])
         begin
-          if args[0] && args[0].strip != 'help'
+          if (%w(version help) & args).empty?
             return Powify::Server.run(args[1..-1]) if args[0].strip == 'server'
             return Powify::Utils.run(args[1..-1]) if args[0].strip == 'utils'
             return Powify::App.run(args)
@@ -13,7 +13,11 @@ module Powify
           $stdout.puts e
         end
 
-        help
+        self.send (%w(version help) & args).first.to_sym
+      end
+
+      def version
+        $stdout.puts Powify::VERSION
       end
 
       def help

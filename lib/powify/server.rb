@@ -5,7 +5,7 @@ require 'json'
 module Powify
   class Server
     extend Powify
-    AVAILABLE_METHODS = %w(install reinstall update uninstall remove start stop restart host unhost status config list logs help)
+    AVAILABLE_METHODS = %w(install reinstall update uninstall remove start stop restart host unhost status config list logs)
 
     class << self
       def run(args = [])
@@ -34,21 +34,22 @@ module Powify
       # Start the POW server (command taken from 37 Signals installation script)
       def start
         $stdout.puts "Starting the pow server..."
-        %x{launchctl load "$HOME/Library/LaunchAgents/cx.pow.powd.plist"}
+        %x{sudo launchctl load -Fw /Library/LaunchDaemons/cx.pow.firewall.plist 2>/dev/null}
+        %x{launchctl load -Fw "$HOME/Library/LaunchAgents/cx.pow.powd.plist" 2>/dev/null}
         $stdout.puts "Done!"
       end
 
       # Stop the POW server (command taken from 37 Signals installation script)
       def stop
         $stdout.puts "Stopping the pow server..."
-        %x{launchctl unload "$HOME/Library/LaunchAgents/cx.pow.powd.plist"}
+        %x{launchctl unload "$HOME/Library/LaunchAgents/cx.pow.powd.plist" 2>/dev/null}
+        %x{sudo launchctl unload "/Library/LaunchDaemons/cx.pow.firewall.plist" 2>/dev/null}
         $stdout.puts "Done!"
       end
 
       # Restart the POW server
       def restart
-        stop
-        start
+        stop && start
       end
 
       # Add POW domains to the hosts file

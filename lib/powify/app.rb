@@ -1,7 +1,7 @@
 module Powify
   class App
     extend Powify
-    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart always_restart always_restart_off browse open rename environment env logs help)
+    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart always_restart always_restart_off browse open rename environment env logs)
 
     class << self
       def run(args)
@@ -72,7 +72,7 @@ module Powify
           $stdout.puts "Type `powify server list` for a full list of applications."
         end
       end
-      
+
       # powify always_restart_off
       # powify always_restart_off foo
       def always_restart_off(args = [])

@@ -1,13 +1,13 @@
 PATH
   remote: .
   specs:
-    powify (0.8.5)
+    powify (0.8.6)
       json
 
 GEM
   remote: http://rubygems.org/
   specs:
-    json (1.6.5)
+    json (1.7.5)
 
 PLATFORMS
   ruby

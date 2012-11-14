@@ -2,6 +2,7 @@ require 'powify/app'
 require 'powify/client'
 require 'powify/server'
 require 'powify/utils'
+require 'powify/version'
 require 'fileutils'
 
 module Powify

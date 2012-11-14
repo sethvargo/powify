@@ -1,9 +1,11 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'powify/version'
 
 Gem::Specification.new do |s|
   s.name        = 'powify'
-  s.version     = '0.8.5'
+  s.version     = Powify::VERSION
   s.author    	= 'Seth Vargo'
   s.email       = 'sethvargo@gmail.com'
   s.homepage    = 'https://github.com/sethvargo/powify'
@@ -15,7 +17,7 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.require_paths = ['lib']
 
   s.add_runtime_dependency 'json'
 end

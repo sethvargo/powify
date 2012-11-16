@@ -69,6 +69,10 @@ APP COMMANDS
   powify logs [NAME]               tail the application logs
 ```
 
+Important Notes
+---------------
+The server commands for `start` and `stop` **only** stop the Pow process. They do not modify the existing firewall rules. If you need to disable the firewall rules, please `uninstall` and `install` to re-activate.
+
 Contribution
 ------------
 - 9/2 [@lindblom](https://github.com/lindblom) - author of `host` and `unhost`

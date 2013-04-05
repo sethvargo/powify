@@ -123,8 +123,18 @@ module Powify
         return if args.empty?
         app_name, env = File.basename(current_path), args[0].strip.to_s.downcase
         app_name, env = args[0].strip.to_s.downcase, args[1].strip.to_s.downcase if args.size > 1
-        symlink_path = "#{POWPATH}/#{app_name}"
-        %x{echo export RAILS_ENV=#{env} > #{symlink_path}/.powenv}
+        symlink_path = "#{POWPATH}/#{app_name}/.powenv"
+        if File.exists?(symlink_path)
+          text = File.read(symlink_path).rstrip
+          if text =~ /^export RAILS_ENV=\S+\Z/
+            text = text.gsub /^export RAILS_ENV=(\S+)\Z/, "export RAILS_ENV=#{env}"
+            File.open(symlink_path, "w") { |f| f.puts text }
+          else
+            %x{echo export RAILS_ENV=#{env} >> #{symlink_path}}
+          end
+        else
+          %x{echo export RAILS_ENV=#{env} > #{symlink_path}}
+        end
         $stdout.puts "Successfully changed environment to #{env}."
         restart [app_name]
       end

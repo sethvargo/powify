@@ -12,12 +12,10 @@ Gem::Specification.new do |s|
   s.summary     = %q{Powify is an easy-to-use wrapper for 37 signal's pow}
   s.description = %q{Powify provides an easy wrapper for use with 37 signal's pow. Use this gem to easily install and update pow server. Easily create, destroy, and manage pow apps.}
 
-  s.rubyforge_project = 'powify'
+  s.required_ruby_version = '>= 1.9'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
-
-  s.add_runtime_dependency 'json'
 end

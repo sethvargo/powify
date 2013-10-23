@@ -1,51 +1,26 @@
-# rcov generated
-coverage
-
-# rdoc generated
-rdoc
-
-# yard generated
-doc
-.yardoc
-
-# bundler
-.bundle
-
-# jeweler generated
-pkg
-
-# Have editor/IDE/OS specific files you need to ignore? Consider using a global gitignore: 
-#
-# * Create a file at ~/.gitignore
-# * Include files you want ignored
-# * Run: git config --global core.excludesfile ~/.gitignore
-#
-# After doing this, these files will be ignored in all your git projects,
-# saving you from having to 'pollute' every project you touch with them
-#
-# Not sure what to needs to be ignored for particular editors/OSes? Here's some ideas to get you started. (Remember, remove the leading # of the line)
-#
-# For MacOS:
-#
-#.DS_Store
-
-# For TextMate
-#*.tmproj
-#tmtags
-
-# For emacs:
-#*~
-#\#*
-#.\#*
-
-# For vim:
-#*.swp
-
-# For redcar:
-#.redcar
-
-# For rubinius:
-#*.rbc
-
-# Ignore gems built in this dir
 *.gem
+*.rbc
+.bundle
+.config
+.rvmrc
+.yardoc
+/Gemfile.lock
+_yardoc
+/coverage
+/doc/
+/pkg
+/spec/reports
+/Berksfile*
+tmp
+*~
+*.tar*
+\#*
+.DS_Store
+/spec/knife.rb
+/spec/*.pem
+/features/config.yml
+*.sw[op]
+\.\#*
+rerun.txt
+.rspec
+.kitchen

@@ -127,7 +127,7 @@ module Powify
       # List all active POW applications currently on the server
       def list
         $stdout.puts "The following POW applications are available:\n\n"
-        Dir["#{POWPATH}/*"].each { |a|
+        Dir["#{POWPATH}/*"].each do |a|
           if File.symlink?(a)
             $stdout.puts "  #{File.basename(a)} -> #{File.readlink(a)}"
           else
@@ -136,7 +136,7 @@ module Powify
             $stdout.puts "  #{File.basename(a)} -> forwarding to :#{port} for" +
                          " #{info.fetch(:command, 'Unknown')}[#{info.fetch(:pid, '???')}]"
           end
-        }
+        end
         $stdout.puts "\nRun `powify open [APP_NAME]` to browse an app"
       end
 

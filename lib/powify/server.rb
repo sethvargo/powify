@@ -119,10 +119,24 @@ module Powify
         $stdout.puts "\n"
       end
 
+      def _extract_forward_info(port)
+        res_types = { 'p' => :pid, 'c' => :command }
+        result = %x{lsof -iTCP:#{port} -Fpc}
+        Hash[ result.split("\n").map { |line| [ res_types[line[0]], line[1..-1] ] } ]
+      end
       # List all active POW applications currently on the server
       def list
         $stdout.puts "The following POW applications are available:\n\n"
-        Dir["#{POWPATH}/*"].each { |a| $stdout.puts "  #{File.basename(a)} -> #{File.readlink(a)}" }
+        Dir["#{POWPATH}/*"].each do |a|
+          if File.symlink?(a)
+            $stdout.puts "  #{File.basename(a)} -> #{File.readlink(a)}"
+          else
+            port = File.open(a) { |f| f.readline.to_i }
+            info = _extract_forward_info(port)
+            $stdout.puts "  #{File.basename(a)} -> forwarding to :#{port} for" +
+                         " #{info.fetch(:command, 'Unknown')}[#{info.fetch(:pid, '???')}]"
+          end
+        end
         $stdout.puts "\nRun `powify open [APP_NAME]` to browse an app"
       end
 

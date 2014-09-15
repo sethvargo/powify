@@ -17,7 +17,7 @@ module Powify
       def install
         uninstall
         $stdout.puts "Cloning powify.dev from github and bundling powify.dev..."
-        %x{git clone -q https://github.com/sethvargo/powify.git powify && cd powify && bundle install --deployment && cd .. && mv powify "#{config['hostRoot']}"}
+        %x{git clone -q https://github.com/sethvargo/powify.dev.git powify && cd powify && bundle install --deployment && cd .. && mv powify "#{config['hostRoot']}"}
         $stdout.puts "Done!"
       end
       alias_method :reinstall, :install

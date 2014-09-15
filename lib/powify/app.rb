@@ -15,8 +15,13 @@ module Powify
       def create(args = [])
         app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
         symlink_path = "#{POWPATH}/#{app_name}"
-        FileUtils.ln_s(current_path, symlink_path)
-        $stdout.puts "Successfully created pow app #{app_name}!"
+        unless File.exist?(symlink_path)
+          FileUtils.ln_s(current_path, symlink_path)
+          $stdout.puts "Successfully created pow app #{app_name}!"
+        else
+          $stdout.puts "App `#{app_name}` already exists."
+          $stdout.puts "Powify skipped to create symlink."
+        end
         $stdout.puts "Type `powify browse #{app_name}` to open the application in your browser."
       end
       alias_method :link, :create

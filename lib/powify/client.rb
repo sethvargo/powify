@@ -3,6 +3,7 @@ module Powify
     extend Powify
     class << self
       def run(args = [])
+        return help if args.empty?
         begin
           if (%w(version help) & args).empty?
             return Powify::Server.run(args[1..-1]) if args[0].strip == 'server'

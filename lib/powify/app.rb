@@ -1,7 +1,7 @@
 module Powify
   class App
     extend Powify
-    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart always_restart always_restart_off browse open rename environment env logs)
+    AVAILABLE_METHODS = %w(create link new destroy unlink remove restart always_restart always_restart_off browse open rename environment env logs xip)
 
     class << self
       def run(args)
@@ -106,6 +106,26 @@ module Powify
         end
       end
       alias_method :open, :browse
+
+      # powify browse
+      # powify browse foo
+      # powify browse foo test
+      def xip(args = [])
+        app_name = args[0] ? args[0].strip.to_s.downcase : File.basename(current_path)
+        ext = args[1] || extension
+        symlink_path = "#{POWPATH}/#{app_name}"
+        if File.exists?(symlink_path)
+          local_ip = UDPSocket.open do |s|
+            s.connect('www.example.com', 1)
+            s.addr.last
+          end
+          url = "#{app_name}.#{local_ip}.xip.io"
+          %x{open http://#{url}}
+        else
+          $stdout.puts "Powify could not find an app to browse with the name #{app_name}"
+          Powify::Server.list
+        end
+      end
 
       # powify rename bar
       # powify rename foo bar

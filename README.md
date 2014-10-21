@@ -66,6 +66,7 @@ APP COMMANDS
   powify rename [OLD] [NEW]        rename the pow app [OLD] to [NEW]
   powify environment [ENV]         run the this pow app in a different environment (aliased `env`)
   powify browse [NAME]             opens and navigates the default browser to this app
+  powify xip [NAME]                opens and navigates the default browser to this app on xip.io
   powify logs [NAME]               tail the application logs
 ```
 

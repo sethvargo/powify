@@ -14,7 +14,8 @@ module Powify
           $stdout.puts e
         end
 
-        self.send (%w(version help) & args).first.to_sym
+        primary_arg = (%w(version help) & args).first
+        self.send primary_arg.to_sym if primary_arg
       end
 
       def version

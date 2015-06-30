@@ -49,7 +49,8 @@ module Powify
 
       # Restart the POW server
       def restart
-        stop && start
+        stop
+        start
       end
 
       # Add POW domains to the hosts file
